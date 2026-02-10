@@ -1,0 +1,44 @@
+{% extends 'reviews/base.html' %}
+
+{% block content %}
+<div class="container">
+    <div class="profile-header">
+        <h1>{{ user.username }}'s Profile</h1>
+        {% if user.profile.profile_picture %}
+            <img src="{{ user.profile.profile_picture.url }}" alt="Profile Picture" class="profile-pic">
+        {% endif %}
+    </div>
+
+    <div class="profile-content">
+        <section class="profile-edit">
+            <h2>Edit Profile</h2>
+            <form method="post" enctype="multipart/form-data">
+                {% csrf_token %}
+                {{ form.as_p }}
+                <button type="submit" class="btn btn-primary">Update Profile</button>
+            </form>
+        </section>
+
+        <section class="user-activity">
+            <h2>Your Reviews</h2>
+            {% for review in user_reviews %}
+                <div class="review-item">
+                    <h4>{{ review.title }}</h4>
+                    <p>Movie: <a href="{% url 'movie_detail' review.movie.pk %}">{{ review.movie.title }}</a></p>
+                </div>
+            {% empty %}
+                <p>You haven't written any reviews yet.</p>
+            {% endfor %}
+
+            <h2>Your Ratings</h2>
+            {% for rating in user_ratings %}
+                <div class="rating-item">
+                    <p><a href="{% url 'movie_detail' rating.movie.pk %}">{{ rating.movie.title }}</a> - {{ rating.rating }}/10</p>
+                </div>
+            {% empty %}
+                <p>You haven't rated any movies yet.</p>
+            {% endfor %}
+        </section>
+    </div>
+</div>
+{% endblock %}

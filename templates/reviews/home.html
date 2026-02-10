@@ -1,0 +1,46 @@
+{% extends 'reviews/base.html' %}
+
+{% block content %}
+<div class="hero">
+    <div class="container">
+        <h1>Welcome to MovieFlix</h1>
+        <p>Discover, Rate, and Review Your Favorite Movies</p>
+    </div>
+</div>
+
+<div class="container">
+    <section class="featured-movies">
+        <h2>Featured Movies</h2>
+        <div class="movie-grid">
+            {% for movie in movies %}
+                <div class="movie-card">
+                    {% if movie.poster %}
+                        <img src="{{ movie.poster.url }}" alt="{{ movie.title }}">
+                    {% else %}
+                        <div class="no-poster">No Poster</div>
+                    {% endif %}
+                    <div class="movie-info">
+                        <h3>{{ movie.title }}</h3>
+                        <p class="genre">{{ movie.get_genre_display }}</p>
+                        <div class="rating">
+                            ⭐ {{ movie.average_rating }}/10
+                        </div>
+                        <a href="{% url 'movie_detail' movie.pk %}" class="btn">View Details</a>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    </section>
+
+    <section class="recent-reviews">
+        <h2>Recent Reviews</h2>
+        {% for review in recent_reviews %}
+            <div class="review-preview">
+                <h4>{{ review.title }}</h4>
+                <p><strong>{{ review.user.username }}</strong> reviewed <a href="{% url 'movie_detail' review.movie.pk %}">{{ review.movie.title }}</a></p>
+                <p>{{ review.content|truncatewords:30 }}</p>
+            </div>
+        {% endfor %}
+    </section>
+</div>
+{% endblock %}

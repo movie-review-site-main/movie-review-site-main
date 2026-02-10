@@ -1,0 +1,36 @@
+{% extends 'reviews/base.html' %}
+
+{% block content %}
+<div class="container">
+    <h1>All Movies</h1>
+    
+    <div class="filter-section">
+        <a href="{% url 'movie_list' %}" class="filter-btn">All</a>
+        <a href="?genre=action" class="filter-btn">Action</a>
+        <a href="?genre=comedy" class="filter-btn">Comedy</a>
+        <a href="?genre=drama" class="filter-btn">Drama</a>
+        <a href="?genre=horror" class="filter-btn">Horror</a>
+        <a href="?genre=sci-fi" class="filter-btn">Sci-Fi</a>
+    </div>
+
+    <div class="movie-grid">
+        {% for movie in movies %}
+            <div class="movie-card">
+                {% if movie.poster %}
+                    <img src="{{ movie.poster.url }}" alt="{{ movie.title }}">
+                {% else %}
+                    <div class="no-poster">No Poster</div>
+                {% endif %}
+                <div class="movie-info">
+                    <h3>{{ movie.title }}</h3>
+                    <p class="genre">{{ movie.get_genre_display }}</p>
+                    <div class="rating">
+                        ⭐ {{ movie.average_rating }}/10
+                    </div>
+                    <a href="{% url 'movie_detail' movie.pk %}" class="btn">View Details</a>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}
