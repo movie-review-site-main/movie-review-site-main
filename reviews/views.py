@@ -57,11 +57,25 @@ def profile(request):
 
 def movie_list(request):
     movies = Movie.objects.annotate(avg_rating=Avg('ratings__rating')).order_by('-created_at')
+    
+    # Фильтр по жанру
     genre = request.GET.get('genre')
     if genre:
         movies = movies.filter(genre=genre)
     
-    context = {'movies': movies}
+    # ДОБАВЬТЕ ФИЛЬТР ПО ГОДУ
+    year = request.GET.get('year')
+    if year:
+        movies = movies.filter(release_date__year=year)
+    
+    # Получить список доступных годов
+    years = Movie.objects.dates('release_date', 'year', order='DESC')
+    
+    context = {
+        'movies': movies,
+        'years': years,  # Добавить в контекст
+        'current_year': year,
+    }
     return render(request, 'reviews/movie_list.html', context)
 
 def movie_detail(request, pk):
