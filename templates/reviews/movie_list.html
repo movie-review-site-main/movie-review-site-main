@@ -12,6 +12,16 @@
         <a href="?genre=horror" class="filter-btn">Horror</a>
         <a href="?genre=sci-fi" class="filter-btn">Sci-Fi</a>
     </div>
+    
+    <div class="year-filter-section">
+        <h3>Filter by Year:</h3>
+        <div class="year-buttons">
+            <a href="{% url 'movie_list' %}" class="year-btn {% if not current_year %}active{% endif %}">All Years</a>
+            {% for year in years %}
+                <a href="?year={{ year.year }}" class="year-btn {% if current_year == year.year|stringformat:'s' %}active{% endif %}">{{ year.year }}</a>
+            {% endfor %}
+        </div>
+    </div>
 
     <div class="movie-grid">
         {% for movie in movies %}

@@ -502,3 +502,37 @@ body {
     color: #E50914;
     text-decoration: none;
 }
+/* Year Filter */
+.year-filter-section {
+    margin-top: 20px;
+    background-color: #1a1a1a;
+    padding: 20px;
+    border-radius: 8px;
+}
+
+.year-filter-section h3 {
+    color: #E50914;
+    margin-bottom: 15px;
+    font-size: 16px;
+}
+
+.year-buttons {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.year-btn {
+    padding: 8px 16px;
+    background-color: #333;
+    color: white;
+    text-decoration: none;
+    border-radius: 20px;
+    font-size: 13px;
+    transition: all 0.3s;
+}
+
+.year-btn:hover, .year-btn.active {
+    background-color: #E50914;
+    transform: translateY(-2px);
+}
