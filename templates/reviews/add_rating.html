@@ -3,12 +3,57 @@
 {% block content %}
 <div class="container">
     <div class="form-container">
-        <h2>Rate: {{ movie.title }}</h2>
+        <h2>Rate Movie</h2>
+        <div class="movie-preview">
+            <h3>{{ movie.title }}</h3>
+            <p class="genre-label">{{ movie.get_genre_display }} • {{ movie.release_date.year }}</p>
+        </div>
+        
         <form method="post">
             {% csrf_token %}
-            {{ form.as_p }}
+            
+            <div class="form-group">
+                <label for="{{ form.rating.id_for_label }}">Your Rating (1-10):</label>
+                {{ form.rating }}
+                <span class="helptext">Give this movie a rating from 1 (poor) to 10 (excellent)</span>
+                {% if form.rating.errors %}
+                    <ul class="errorlist">
+                        {% for error in form.rating.errors %}
+                            <li>{{ error }}</li>
+                        {% endfor %}
+                    </ul>
+                {% endif %}
+            </div>
+            
             <button type="submit" class="btn btn-primary">Submit Rating</button>
         </form>
+        
+        <p class="form-link">
+            <a href="{% url 'movie_detail' movie.pk %}">← Back to Movie</a>
+        </p>
     </div>
 </div>
+
+<style>
+.movie-preview {
+    text-align: center;
+    padding: 20px;
+    background: linear-gradient(135deg, rgba(229, 9, 20, 0.1) 0%, rgba(229, 9, 20, 0.05) 100%);
+    border-radius: 8px;
+    margin-bottom: 30px;
+    border: 1px solid rgba(229, 9, 20, 0.2);
+}
+
+.movie-preview h3 {
+    color: #E50914;
+    margin-bottom: 10px;
+    font-size: 24px;
+}
+
+.genre-label {
+    color: #b3b3b3;
+    font-size: 14px;
+    margin: 0;
+}
+</style>
 {% endblock %}
