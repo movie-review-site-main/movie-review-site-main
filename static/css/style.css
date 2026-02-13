@@ -172,29 +172,37 @@ body {
 
 /* Forms */
 .form-container {
-    max-width: 500px;
+    max-width: 600px;
     margin: 50px auto;
-    background-color: #1a1a1a;
-    padding: 40px;
-    border-radius: 8px;
-    box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+    background: linear-gradient(135deg, #1a1a1a 0%, #0a0a0a 100%);
+    padding: 50px;
+    border-radius: 12px;
+    box-shadow: 0 8px 32px rgba(229, 9, 20, 0.2);
+    border: 1px solid #2a2a2a;
 }
 
 .form-container h2 {
     color: #E50914;
-    margin-bottom: 25px;
+    margin-bottom: 35px;
     text-align: center;
+    font-size: 32px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 2px;
 }
 
 .form-group {
-    margin-bottom: 20px;
+    margin-bottom: 25px;
 }
 
 .form-group label {
     display: block;
-    margin-bottom: 8px;
-    color: #e5e5e5;
+    margin-bottom: 10px;
+    color: #b3b3b3;
     font-size: 14px;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 1px;
 }
 
 .form-group input,
@@ -202,32 +210,170 @@ body {
 .form-group select,
 .form-control {
     width: 100%;
-    padding: 12px;
-    background-color: #333;
-    border: 1px solid #555;
-    border-radius: 4px;
-    color: white;
-    font-size: 14px;
+    padding: 14px 18px;
+    background-color: #0a0a0a;
+    border: 2px solid #2a2a2a;
+    border-radius: 6px;
+    color: #e5e5e5;
+    font-size: 15px;
+    transition: all 0.3s ease;
+    font-family: 'Helvetica Neue', Arial, sans-serif;
 }
 
 .form-group input:focus,
 .form-group textarea:focus,
-.form-group select:focus {
+.form-group select:focus,
+.form-control:focus {
     outline: none;
     border-color: #E50914;
+    background-color: #141414;
+    box-shadow: 0 0 0 3px rgba(229, 9, 20, 0.1);
+}
+
+.form-group input::placeholder,
+.form-group textarea::placeholder {
+    color: #666;
+    font-style: italic;
+}
+
+.form-group textarea {
+    resize: vertical;
+    min-height: 120px;
+}
+
+.form-group select {
+    cursor: pointer;
+    appearance: none;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%23E50914' d='M6 9L1 4h10z'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 15px center;
+    padding-right: 40px;
+}
+
+.form-group input[type="file"] {
+    padding: 12px;
+    cursor: pointer;
+    border-style: dashed;
+}
+
+.form-group input[type="file"]:hover {
+    border-color: #E50914;
+    background-color: #141414;
+}
+
+.form-group input[type="date"] {
+    cursor: pointer;
+}
+
+/* Стилизация для input type number (рейтинг) */
+.form-group input[type="number"] {
+    -moz-appearance: textfield;
+}
+
+.form-group input[type="number"]::-webkit-inner-spin-button,
+.form-group input[type="number"]::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+/* Buttons в формах */
+.btn-primary {
+    background: linear-gradient(135deg, #E50914 0%, #b00710 100%);
+    width: 100%;
+    padding: 16px;
+    margin-top: 20px;
+    font-size: 16px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(229, 9, 20, 0.3);
+}
+
+.btn-primary:hover {
+    background: linear-gradient(135deg, #ff0a16 0%, #E50914 100%);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(229, 9, 20, 0.4);
+}
+
+.btn-primary:active {
+    transform: translateY(0);
 }
 
 .form-link {
     text-align: center;
-    margin-top: 20px;
+    margin-top: 25px;
     color: #b3b3b3;
+    font-size: 14px;
 }
 
 .form-link a {
     color: #E50914;
     text-decoration: none;
+    font-weight: 600;
+    transition: color 0.3s;
 }
 
+.form-link a:hover {
+    color: #ff0a16;
+    text-decoration: underline;
+}
+
+/* Улучшенный стиль для ошибок валидации */
+.form-group .errorlist {
+    list-style: none;
+    padding: 0;
+    margin: 8px 0 0 0;
+}
+
+.form-group .errorlist li {
+    color: #ff4444;
+    font-size: 13px;
+    padding: 5px 10px;
+    background-color: rgba(255, 68, 68, 0.1);
+    border-left: 3px solid #ff4444;
+    margin-top: 5px;
+    border-radius: 3px;
+}
+
+/* Стиль для help text */
+.form-group .helptext {
+    display: block;
+    margin-top: 5px;
+    font-size: 12px;
+    color: #666;
+    font-style: italic;
+}
+
+/* Дополнительные стили для красивого отображения */
+.form-group input[type="file"]::file-selector-button {
+    background-color: #E50914;
+    color: white;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 4px;
+    cursor: pointer;
+    margin-right: 10px;
+    font-weight: 600;
+    transition: background-color 0.3s;
+}
+
+.form-group input[type="file"]::file-selector-button:hover {
+    background-color: #b00710;
+}
+
+/* Стиль для disabled полей */
+.form-group input:disabled,
+.form-group textarea:disabled,
+.form-group select:disabled {
+    background-color: #1a1a1a;
+    color: #666;
+    cursor: not-allowed;
+    border-color: #333;
+}
 /* Movie Detail */
 .movie-detail {
     margin-top: 30px;
