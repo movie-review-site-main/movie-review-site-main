@@ -15,7 +15,9 @@
                 <li><a href="{% url 'home' %}">Home</a></li>
                 <li><a href="{% url 'movie_list' %}">Movies</a></li>
                 <li><a href="{% url 'top_rated' %}">Top Rated</a></li>
+
                 {% if user.is_authenticated %}
+                    <li><a href="{% url 'recommendations' %}">Recommended</a></li>
                     <li><a href="{% url 'add_movie' %}">Add Movie</a></li>
                     <li><a href="{% url 'profile' %}">Profile</a></li>
                     <li><a href="{% url 'logout' %}">Logout</a></li>
