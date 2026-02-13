@@ -1,0 +1,42 @@
+{% extends 'reviews/base.html' %}
+
+{% block content %}
+<div class="container">
+    <h1>Recommended for You</h1>
+    
+    {% if not has_ratings %}
+        <div class="info-message">
+            <p>We need to learn your preferences first!</p>
+            <p>Start by rating some movies to get personalized recommendations.</p>
+            <a href="{% url 'movie_list' %}" class="btn">Browse Movies</a>
+        </div>
+    {% endif %}
+    
+    {% if recommended_movies %}
+        <div class="recommendations-section">
+            <h2>Based on your ratings, you might like:</h2>
+            <div class="movie-grid">
+                {% for movie in recommended_movies %}
+                    <div class="movie-card">
+                        {% if movie.poster %}
+                            <img src="{{ movie.poster.url }}" alt="{{ movie.title }}">
+                        {% else %}
+                            <div class="no-poster">No Poster</div>
+                        {% endif %}
+                        <div class="movie-info">
+                            <h3>{{ movie.title }}</h3>
+                            <p class="genre">{{ movie.get_genre_display }}</p>
+                            <div class="rating">
+                                ⭐ {{ movie.avg_rating|default:"N/A" }}/10
+                            </div>
+                            <a href="{% url 'movie_detail' movie.pk %}" class="btn">View Details</a>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+    {% else %}
+        <p>No recommendations available at the moment. Try rating more movies!</p>
+    {% endif %}
+</div>
+{% endblock %}
